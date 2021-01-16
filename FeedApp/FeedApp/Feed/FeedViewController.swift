@@ -28,7 +28,7 @@ final class FeedViewController: UIViewController {
         let buttonItem = UIBarButtonItem(customView: button)
         return buttonItem
     }()
-    
+
     private var cellIsSelected = false
 
     init(output: FeedViewOutput) {
@@ -70,7 +70,6 @@ extension FeedViewController: FeedViewInput {
         self.selectedActionTitle = selectedActionTitle
         collectionView.reloadData()
     }
-
 }
 
 extension FeedViewController: UICollectionViewDelegate {

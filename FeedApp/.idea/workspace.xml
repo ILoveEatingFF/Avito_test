@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d18f2176-395a-497c-986d-9132e05a58c1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FeedApp/Feed/FeedPresenter.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FeedApp/Feed/FeedPresenter.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FeedApp/Feed/FeedViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FeedApp/Feed/FeedViewController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FeedApp/Feed/ViewModels/ViewModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FeedApp/Feed/ViewModels/ViewModel.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +65,7 @@
       <option name="presentableId" value="Default" />
       <updated>1610532319051</updated>
       <workItem from="1610532320216" duration="10789000" />
-      <workItem from="1610580665167" duration="61935000" />
+      <workItem from="1610580665167" duration="63566000" />
     </task>
     <servers />
   </component>

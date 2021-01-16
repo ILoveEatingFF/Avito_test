@@ -9,4 +9,5 @@ struct ViewModel {
     var title: String
     var description: String
     var cost: String
+    var isSelected: Bool
 }
