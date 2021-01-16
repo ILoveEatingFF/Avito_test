@@ -2,35 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d18f2176-395a-497c-986d-9132e05a58c1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/xcode.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp.xcodeproj/project.pbxproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp.xcodeproj/project.xcworkspace/contents.xcworkspacedata" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/AppDelegate.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Assets.xcassets/AccentColor.colorset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Assets.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Assets.xcassets/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Assets.xcassets/checkmark.imageset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Assets.xcassets/checkmark.imageset/checkmark.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Assets.xcassets/cross.imageset/CloseIconTemplate.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Assets.xcassets/cross.imageset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Base.lproj/LaunchScreen.storyboard" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Feed/FeedContainer.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Feed/FeedInteractor.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Feed/FeedPresenter.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Feed/FeedProtocols.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Feed/FeedRouter.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Feed/FeedViewController.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Feed/ViewModels/ViewModel.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Feed/Views/FeedFooter.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Feed/Views/FeedHeader.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Feed/Views/FeedViewCell.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Helpers/BaseRouter.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Helpers/Styles.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/Info.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeedApp/SceneDelegate.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FeedApp/Entities/Upgrades.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FeedApp/Extensions/UIImageView.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../result.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/xcode.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/xcode.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FeedApp.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/FeedApp.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FeedApp/Feed/FeedInteractor.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FeedApp/Feed/FeedInteractor.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FeedApp/Feed/FeedPresenter.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FeedApp/Feed/FeedPresenter.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FeedApp/Feed/FeedProtocols.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FeedApp/Feed/FeedProtocols.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FeedApp/Feed/FeedViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FeedApp/Feed/FeedViewController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FeedApp/Feed/ViewModels/ViewModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FeedApp/Feed/ViewModels/ViewModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FeedApp/Feed/Views/FeedFooter.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FeedApp/Feed/Views/FeedFooter.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FeedApp/Feed/Views/FeedViewCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FeedApp/Feed/Views/FeedViewCell.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +74,7 @@
       <option name="presentableId" value="Default" />
       <updated>1610532319051</updated>
       <workItem from="1610532320216" duration="10789000" />
-      <workItem from="1610580665167" duration="36374000" />
+      <workItem from="1610580665167" duration="60925000" />
     </task>
     <servers />
   </component>

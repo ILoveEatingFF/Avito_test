@@ -36,30 +36,24 @@ extension FeedPresenter: FeedViewOutput {
 }
 
 extension FeedPresenter: FeedInteractorOutput {
-    func didLoad() {
-        let viewModels = makeViewModels()
-        let sectionTitle = "Сделайте объявление заметнее на 7 дней"
-        view?.set(with: viewModels, sectionTitle: sectionTitle)
+    func didLoad(_ upgrades: Upgrades) {
+        let viewModels = makeViewModels(upgrades.upgrades)
+        let sectionTitle = upgrades.sectionTitle
+        view?.set(with: viewModels, sectionTitle: sectionTitle, actionTitle: upgrades.actionTitle,
+                selectedActionTitle: upgrades.selectedActionTitle)
     }
 
 }
 
 private extension FeedPresenter {
-    func makeViewModels() -> [ViewModel] {
-        var result: [ViewModel] = []
-        result.append(ViewModel(image: "lel", title: "XL-объявление",
-                description: "Пользователи смогут посмотреть фотографии, описание и телефон прямо из результатов поиска",
-                cost: "356 ₽"))
-        result.append(ViewModel(
-                image: "kek",
-                title: "Выделить цветом",
-                description: "Яркий цвет не даст затеряться среди других объявлений",
-                cost: "299 ₽"))
-        result.append(ViewModel(
-                image: "ROR",
-                title: "Жесть",
-                description: "Самая жесткая жестокая жесткость просто жесть как жестко",
-                cost: "110"))
-        return result
+    func makeViewModels(_ upgrades: [Upgrade]) -> [ViewModel] {
+        upgrades.map { upgrade in
+            ViewModel(
+                    imageUrl: upgrade.icon.imageUrl,
+                    title: upgrade.title,
+                    description: upgrade.description ?? "",
+                    cost: upgrade.price
+            )
+        }
     }
 }

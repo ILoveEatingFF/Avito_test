@@ -34,7 +34,6 @@ class FeedHeader: UICollectionReusableView {
     private func setupConstraints() {
         title.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-//            title.centerXAnchor.constraint(equalTo: centerXAnchor),
             title.centerYAnchor.constraint(equalTo: centerYAnchor),
             title.leadingAnchor.constraint(equalTo: leadingAnchor),
             title.trailingAnchor.constraint(equalTo: trailingAnchor)

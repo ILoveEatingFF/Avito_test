@@ -20,7 +20,7 @@ protocol FeedModuleOutput: class {
 }
 
 protocol FeedViewInput: class {
-	func set(with viewModels: [ViewModel], sectionTitle: String)
+	func set(with viewModels: [ViewModel], sectionTitle: String, actionTitle: String, selectedActionTitle: String)
 }
 
 protocol FeedViewOutput: class {
@@ -33,7 +33,7 @@ protocol FeedInteractorInput: class {
 }
 
 protocol FeedInteractorOutput: class {
-	func didLoad()
+	func didLoad(_ upgrades: Upgrades)
 }
 
 protocol FeedRouterInput: class {

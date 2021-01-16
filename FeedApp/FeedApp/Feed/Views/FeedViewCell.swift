@@ -28,7 +28,9 @@ class FeedViewCell: UICollectionViewCell {
 
     private let title: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         label.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 26)
+        label.lineBreakMode = .byClipping
         label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         return label
     }()
@@ -64,6 +66,8 @@ class FeedViewCell: UICollectionViewCell {
         }
     }
 
+    private var didSetupConstraints: Bool = false
+
 
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -89,8 +93,11 @@ class FeedViewCell: UICollectionViewCell {
         informationStackView.translatesAutoresizingMaskIntoConstraints = false
         isSelectedImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+
             iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             iconImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
+            iconImageView.heightAnchor.constraint(equalToConstant: 52),
+            iconImageView.widthAnchor.constraint(equalToConstant: 52),
 
             informationStackView.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 20),
             informationStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
@@ -98,19 +105,14 @@ class FeedViewCell: UICollectionViewCell {
             informationStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
 
             isSelectedImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            isSelectedImageView.centerYAnchor.constraint(equalTo: title.centerYAnchor,constant: 10),
+            isSelectedImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 35.0),
         ])
     }
 
-//    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-//        super.preferredLayoutAttributesFitting(layoutAttributes)
-//    }
-
     func update(with viewModel: ViewModel) {
-//        iconImageView.image = UIImage(named: viewModel.image)
-        iconImageView.image = UIImage(named: "cross")
         title.text = viewModel.title
         contentDescription.attributedText = makeLabelTextWithSpacing(text: viewModel.description)
+        iconImageView.setImage(with: URL(string: viewModel.imageUrl))
         cost.text = viewModel.cost
     }
 }

@@ -7,7 +7,8 @@ import UIKit
 class FeedFooter: UICollectionReusableView {
     var chooseButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Выбрать", for: .normal)
+        button.backgroundColor = Styles.Color.beautifulBlue
+        button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(onTapChoose), for: .touchUpInside)
         button.layer.cornerRadius = 16.0
         return button
@@ -43,15 +44,15 @@ class FeedFooter: UICollectionReusableView {
         onTapChooseButton?()
     }
 
-    func setupButton(isCellSelected: Bool) {
+    func setupButton(isCellSelected: Bool, actionTitle: String, selectedActionTitle: String) {
         if(isCellSelected) {
+            chooseButton.setTitle(selectedActionTitle, for: .normal)
             chooseButton.backgroundColor = Styles.Color.beautifulBlue
             chooseButton.setTitleColor(.white, for: .normal)
-            chooseButton.isUserInteractionEnabled = true
         } else {
+            chooseButton.setTitle(actionTitle, for: .normal)
             chooseButton.backgroundColor = Styles.Color.inactiveGray
             chooseButton.setTitleColor(.gray, for: .normal)
-            chooseButton.isUserInteractionEnabled = false
         }
     }
 
@@ -61,8 +62,7 @@ class FeedFooter: UICollectionReusableView {
             chooseButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             chooseButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             chooseButton.heightAnchor.constraint(equalToConstant: 50),
-            chooseButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-
+            chooseButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
         ])
     }
 }
