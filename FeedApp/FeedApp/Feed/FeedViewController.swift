@@ -28,8 +28,7 @@ final class FeedViewController: UIViewController {
         let buttonItem = UIBarButtonItem(customView: button)
         return buttonItem
     }()
-
-    private var setupButtonFunction = false
+    
     private var cellIsSelected = false
 
     init(output: FeedViewOutput) {
@@ -130,12 +129,9 @@ extension FeedViewController: UICollectionViewDataSource {
                         withReuseIdentifier: FeedFooter.identifier,
                         for: indexPath
                 ) as! FeedFooter
-            if !setupButtonFunction {
                 footerView.onTapChooseButton = { [weak self] in
                     self?.onTapChoose()
                 }
-                setupButtonFunction = !setupButtonFunction
-            }
             footerView.setupButton(isCellSelected: cellIsSelected, actionTitle: actionTitle,
                     selectedActionTitle: selectedActionTitle)
             return footerView
