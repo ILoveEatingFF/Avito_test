@@ -37,6 +37,7 @@ class FeedViewCell: UICollectionViewCell {
 
     private let contentDescription: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 18)
         label.numberOfLines = 0
         return label
     }()
