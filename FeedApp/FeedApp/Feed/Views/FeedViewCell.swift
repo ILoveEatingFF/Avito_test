@@ -31,7 +31,7 @@ class FeedViewCell: UICollectionViewCell {
         label.numberOfLines = 0
         label.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 26)
         label.lineBreakMode = .byClipping
-        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+//        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         return label
     }()
 
@@ -67,6 +67,12 @@ class FeedViewCell: UICollectionViewCell {
         }
     }
 
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        layoutAttributes.frame.size = contentView.systemLayoutSizeFitting(contentView.frame.size,
+                withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+        return layoutAttributes
+    }
+
     private var didSetupConstraints: Bool = false
 
 
@@ -96,7 +102,7 @@ class FeedViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
 
             iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            iconImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
+            iconImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 17),
             iconImageView.heightAnchor.constraint(equalToConstant: 52),
             iconImageView.widthAnchor.constraint(equalToConstant: 52),
 
@@ -136,4 +142,9 @@ private extension FeedViewCell {
         )
         return attributedString
     }
+}
+
+
+struct Constants {
+    static let widthPadding: CGFloat = 32.0
 }

@@ -12,13 +12,14 @@ final class FeedViewController: UIViewController {
 	private let output: FeedViewOutput
 
     private var viewModels: [ViewModel] = []
+
     private var sectionTitle: String = ""
+
     private var actionTitle: String = ""
     private var selectedActionTitle: String = ""
-    private lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
-    private lazy var collectionViewLayout = {
-        setupLayout()
-    }()
+
+    private let collectionView: UICollectionView
+    private let collectionViewLayout = UICollectionViewFlowLayout()
 
     private let exitButton: UIBarButtonItem = {
         let button = UIButton(type: .system)
@@ -29,10 +30,19 @@ final class FeedViewController: UIViewController {
         return buttonItem
     }()
 
-    private var cellIsSelected = false
+    private let chooseButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = Styles.Color.inactiveGray
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(onTapChoose), for: .touchUpInside)
+        button.layer.cornerRadius = 16.0
+        return button
+    }()
 
     init(output: FeedViewOutput) {
         self.output = output
+        collectionViewLayout.scrollDirection = .vertical
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -42,7 +52,9 @@ final class FeedViewController: UIViewController {
 
     override func loadView() {
         let view = UIView()
+        view.backgroundColor = .white
         view.addSubview(collectionView)
+        view.addSubview(chooseButton)
         self.view = view
         setupCollectionView()
         setupExitButton()
@@ -54,11 +66,11 @@ final class FeedViewController: UIViewController {
         output.viewDidLoad()
 	}
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animate(alongsideTransition: { context in
-            self.collectionView.collectionViewLayout.invalidateLayout()
-        }, completion: nil)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        collectionViewLayout.estimatedItemSize = CGSize(width: collectionView.frame.width - Constants.widthPadding, height: 230)
+        collectionViewLayout.itemSize = CGSize(width: collectionView.frame.width - Constants.widthPadding, height: UICollectionViewFlowLayout.automaticSize.height)
     }
 }
 
@@ -67,6 +79,7 @@ extension FeedViewController: FeedViewInput {
         self.sectionTitle = sectionTitle
         self.viewModels = viewModels
         self.actionTitle = actionTitle
+        chooseButton.setTitle(actionTitle, for: .normal)
         self.selectedActionTitle = selectedActionTitle
         collectionView.reloadData()
     }
@@ -74,26 +87,20 @@ extension FeedViewController: FeedViewInput {
 
 extension FeedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let footer = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionFooter,
-                at: IndexPath(item: 0, section: 0)) as? FeedFooter
-
         if let cell = collectionView.cellForItem(at: indexPath) as? FeedViewCell {
             if cell.isSelected {
-                cellIsSelected = false
-                footer?.chooseButton.setTitle(actionTitle, for: .normal)
-                footer?.chooseButton.backgroundColor = Styles.Color.inactiveGray
-                footer?.chooseButton.setTitleColor(.gray, for: .normal)
+                chooseButton.setTitle(actionTitle, for: .normal)
+                chooseButton.backgroundColor = Styles.Color.inactiveGray
+                chooseButton.setTitleColor(.gray, for: .normal)
                 collectionView.deselectItem(at: indexPath, animated: true)
                 return false
             } else {
-                cellIsSelected = true
-                footer?.chooseButton.setTitle(selectedActionTitle, for: .normal)
-                footer?.chooseButton.backgroundColor = Styles.Color.beautifulBlue
-                footer?.chooseButton.setTitleColor(.white, for: .normal)
+                chooseButton.setTitle(selectedActionTitle, for: .normal)
+                chooseButton.backgroundColor = Styles.Color.beautifulBlue
+                chooseButton.setTitleColor(.white, for: .normal)
                 return true
             }
         }
-        cellIsSelected = false
         return false
     }
 }
@@ -122,21 +129,19 @@ extension FeedViewController: UICollectionViewDataSource {
             ) as! FeedHeader
             headerView.setTitleText(with: sectionTitle)
             return headerView
-        case UICollectionView.elementKindSectionFooter:
-                let footerView = collectionView.dequeueReusableSupplementaryView(
-                        ofKind: kind,
-                        withReuseIdentifier: FeedFooter.identifier,
-                        for: indexPath
-                ) as! FeedFooter
-                footerView.onTapChooseButton = { [weak self] in
-                    self?.onTapChoose()
-                }
-            footerView.setupButton(isCellSelected: cellIsSelected, actionTitle: actionTitle,
-                    selectedActionTitle: selectedActionTitle)
-            return footerView
         default:
             assert(false, "Unexpected element kind")
         }
+    }
+}
+
+extension FeedViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        CGSize(width: collectionView.frame.width, height: 100)
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        15.0
     }
 }
 
@@ -148,44 +153,7 @@ private extension FeedViewController {
         collectionView.register(FeedViewCell.self, forCellWithReuseIdentifier: FeedViewCell.identifier)
         collectionView.register(FeedHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                 withReuseIdentifier: FeedHeader.identifier)
-        collectionView.register(FeedFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-                withReuseIdentifier: FeedFooter.identifier)
-        collectionView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
-    }
-
-    func setupLayout() -> UICollectionViewCompositionalLayout {
-        let size = NSCollectionLayoutSize(
-                widthDimension: NSCollectionLayoutDimension.fractionalWidth(1.0),
-                heightDimension: NSCollectionLayoutDimension.estimated(230)
-        )
-
-        let item = NSCollectionLayoutItem(layoutSize: size)
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitem: item, count: 1)
-
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 10, trailing: 16)
-        section.interGroupSpacing = 20
-
-        let headerFooterSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated(140)
-        )
-        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
-                layoutSize: headerFooterSize,
-                elementKind: UICollectionView.elementKindSectionHeader,
-                alignment: .top
-        )
-
-        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
-                layoutSize: headerFooterSize,
-                elementKind: UICollectionView.elementKindSectionFooter,
-                alignment: .bottom
-        )
-
-        section.boundarySupplementaryItems = [sectionHeader, sectionFooter]
-
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
+        collectionView.contentInset = UIEdgeInsets(top: 30, left: 16, bottom: 90, right: 16.0)
     }
 
     func setupExitButton() {
@@ -195,12 +163,18 @@ private extension FeedViewController {
 
     func setupConstraints() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        chooseButton.translatesAutoresizingMaskIntoConstraints = false
         let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+
+            chooseButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -20.0),
+            chooseButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16.0),
+            chooseButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16.0),
+            chooseButton.heightAnchor.constraint(equalToConstant: 50.0)
         ])
     }
 
